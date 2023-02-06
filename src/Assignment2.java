@@ -36,11 +36,11 @@ public class Assignment2 {
         System.out.print("What is the bid increment?\n");
         bidIncrement = sc.nextInt();
         //creating a lot for the user to use
-        Lot item = new Lot(description, startingBid, bidIncrement, false);
+        Lot item = new Lot(description, startingBid, bidIncrement);
         arrayList.add(item);
     }
 
-    public  void methodBid(Lot chosenLot) {
+    public static void methodBid(Lot chosenLot) {
         Scanner sc = new Scanner(System.in);
         System.out.println("How much would you like to bid? Minimum must be " + chosenLot.getCurrentBid());
         int userBid = sc.nextInt();
@@ -87,14 +87,13 @@ public class Assignment2 {
                         } else {
                             currentLot.setBidding(true);
                             System.out.println("Current Lot: \n" + currentLot);
-                            currentLot = getNextLot(lot);
-
                         }
                         break;
                     case 3:
                         if (!currentLot.getIsBidding()) {
-                            System.out.println("You must bring a Lot up for bidding");
+                            System.out.println("You must first bring a Lot up for bidding");
                         } else {
+                            methodBid(currentLot);
                             System.out.println("Lot " + currentLot.getLotNumber() + ". " + currentLot.getDescription() + " current bid: $" + currentLot.getCurrentBid() + " minimum bid: $" + currentLot.nextBid());
                         }
                         break;
@@ -103,10 +102,12 @@ public class Assignment2 {
                             System.out.println("You must first bring a Lot up for bidding");
                         }
                         else
-                        markSold(currentLot);
+                        currentLot.markSold();
+                        currentLot.setBidding(false);
+                        currentLot = getNextLot(lot);
                         break;
                 }
-
         }
+
     }
 }

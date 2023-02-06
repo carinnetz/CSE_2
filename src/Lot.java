@@ -28,7 +28,7 @@ public class Lot {
     }
 
     //public Class-name
-    public Lot(String description, int currentBid, int bidIncrement, boolean sold) {
+    public Lot(String description, int currentBid, int bidIncrement) {
 
        lotNumber = 1000;
        num = 1;
@@ -38,8 +38,7 @@ public class Lot {
        this.description = description;
         this.currentBid = currentBid;
         this.bidIncrement = bidIncrement;
-        this.sold = sold;
-
+        this.sold = false;
     }
 
     public int getLotNumber() {
