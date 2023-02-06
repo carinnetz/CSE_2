@@ -40,21 +40,21 @@ public class Assignment2 {
         arrayList.add(item);
     }
 
-    public static void methodBid(Lot chosenLot) {
+    public static void methodBid(Lot lot) {
         Scanner sc = new Scanner(System.in);
-        System.out.println("How much would you like to bid? Minimum must be " + chosenLot.getCurrentBid());
+        System.out.println("How much would you like to bid? Minimum must be " + lot.getCurrentBid());
         int userBid = sc.nextInt();
-        if (userBid < chosenLot.getCurrentBid()) {
+        if (userBid < lot.getCurrentBid()) {
             System.out.println("You are below the minimum bid.");
         } else {
-            chosenLot.setCurrentBid(userBid);
+            lot.setCurrentBid(userBid);
         }
     }
 
     //marking and printing the lot as sold
-    public static void markSold(Lot chosenLot) {
-        chosenLot.markSold();
-        System.out.println(chosenLot);
+    public static void markSold(Lot lot) {
+        lot.markSold();
+        System.out.println(lot);
     }
 
     public static void mainMenu(ArrayList<Lot> lot) {
@@ -80,9 +80,9 @@ public class Assignment2 {
                         addItem(lot);
                         break;
                     case 2:
-                        if (currentLot == null) {
+                        if (lot.isEmpty()) {
                             System.out.println("There is nothing to bid on, add an item first");
-                        } else if ((currentLot != null) && (!currentLot.getSold())) {
+                        } else if ((!lot.isEmpty()) && (currentLot.getSold())) {
                             System.out.println("You must mark the current lot as sold before bringing up the next Lot");
                         } else {
                             currentLot.setBidding(true);

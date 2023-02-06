@@ -32,8 +32,8 @@ public class Lot {
 
        lotNumber = 1000;
        num = 1;
-       num++;
        lotNumber = lotNumber + num;
+       num++;
        isBidding = false;
        this.description = description;
         this.currentBid = currentBid;
@@ -78,6 +78,7 @@ public class Lot {
     //setter for current bid
     public void setCurrentBid(int currentBid) {
         this.currentBid = currentBid;
+
     }
 
     //setter isBidding
@@ -86,9 +87,8 @@ public class Lot {
     }
 
     //nextBid method
-    public double nextBid() {
-        double nextBid = currentBid + bidIncrement;
-        return nextBid;
+    public int nextBid() {
+        return currentBid + bidIncrement;
     }
 
     //override return
