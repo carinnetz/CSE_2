@@ -28,18 +28,18 @@ public class Assignment2 {
     public static void addItem(ArrayList<Lot> arrayList) {
         Scanner sc = new Scanner(System.in);
         int startingBid, bidIncrement;
-        System.out.println("Give a description?");
-        String description = sc.next();
-        System.out.println("What is the starting bid?");
+        System.out.print("Give a description?\n");
+        String description = sc.nextLine().trim();
+        System.out.print("What is the starting bid?\n");
         startingBid = sc.nextInt();
-        System.out.println("What is the bid increment");
+        System.out.print("What is the bid increment?\n");
         bidIncrement = sc.nextInt();
         //creating a lot for the user to use
         Lot item = new Lot(description, startingBid, bidIncrement, false);
         arrayList.add(item);
     }
 
-    public static void methodBid(Lot chosenLot) {
+    public  void methodBid(Lot chosenLot) {
         Scanner sc = new Scanner(System.in);
         System.out.println("How much would you like to bid? Minimum must be " + chosenLot.getCurrentBid());
         int userBid = sc.nextInt();
@@ -62,6 +62,8 @@ public class Assignment2 {
         int answer = 1;
         while (answer < 5) {
             System.out.println("""
+                    We are not currently bidding 
+                    
                     1. Add Lot to Auction
                     2. Start bidding on next Lot
                     3. Bid on current Lot
@@ -77,7 +79,7 @@ public class Assignment2 {
                     case 2:
                         if (currentLot == null) {
                             System.out.println("There is nothing to bid on, add an item first");
-                        } else if (currentLot != null && currentLot.getSold()) {
+                        } else if ((currentLot != null) && (!currentLot.getSold())) {
                             System.out.println("You must mark the current lot as sold before bringing up the next Lot");
                         } else {
                             currentLot = getNextLot(lot);
@@ -85,7 +87,7 @@ public class Assignment2 {
                         break;
                     case 3:
                         if (currentLot == null) {
-                            System.out.println("Current Lot is null or it’s description is \"Unknown Item\"");
+                            System.out.println("You must bring a Lot up for bidding");
                         } else {
                             System.out.println("Lot " + currentLot.getLotNumber() + ". " + currentLot.getDescription() + " current bid: $" + currentLot.getCurrentBid() + " minimum bid: $" + currentLot.nextBid());
                         }
@@ -94,12 +96,10 @@ public class Assignment2 {
                         if (currentLot == null || Objects.equals(currentLot.getDescription(), "Unknown Item") || !currentLot.getSold()) {
                             System.out.println("You must first bring a Lot up for bidding");
                         }
+                        else
                         markSold(currentLot);
                         break;
                 }
             }
-        if (currentLot == null || Objects.equals(currentLot.getDescription(), "Unknown Item")) {
-            System.out.println("We are not currently bidding");
-        }
     }
 }
