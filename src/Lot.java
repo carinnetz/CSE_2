@@ -1,5 +1,7 @@
 public class Lot {
 
+    //boolean for lot when 2 has been pressed
+    private boolean isBidding;
 
     //declaring description for lotNumber
     private int lotNumber;
@@ -22,17 +24,18 @@ public class Lot {
         currentBid = 0;
         bidIncrement = 0;
         sold = false;
+        isBidding = false;
     }
 
     //public Class-name
     public Lot(String description, int currentBid, int bidIncrement, boolean sold) {
 
-        description = "Unknown Item";
-        currentBid = 0;
-        bidIncrement = 0;
-        sold = false;
-
-        this.description = description;
+       lotNumber = 1000;
+       num = 1;
+       num++;
+       lotNumber = lotNumber + num;
+       isBidding = false;
+       this.description = description;
         this.currentBid = currentBid;
         this.bidIncrement = bidIncrement;
         this.sold = sold;
@@ -42,6 +45,7 @@ public class Lot {
     public int getLotNumber() {
         return lotNumber;
     }
+
 
     //sets sold variable to true
     public void markSold() {
@@ -58,6 +62,11 @@ public class Lot {
         return bidIncrement;
     }
 
+    //isBidding getter
+    public boolean getIsBidding() {
+        return isBidding;
+    }
+
     //description getter
     public String getDescription() {
         return description;
@@ -72,6 +81,11 @@ public class Lot {
         this.currentBid = currentBid;
     }
 
+    //setter isBidding
+    public void setBidding(boolean bidding) {
+        isBidding = bidding;
+    }
+
     //nextBid method
     public double nextBid() {
         double nextBid = currentBid + bidIncrement;
@@ -81,14 +95,12 @@ public class Lot {
     //override return
     @Override
     public String toString() {
-        if (!sold) {
-            System.out.println("Lot " + lotNumber + ". " + description + " was sold for $" + currentBid);
+        String lot;
+        if (sold) {
+            lot = "Lot " + lotNumber + ". " + description + " was sold for $" + currentBid;
         } else {
-
-            System.out.println("Lot " + lotNumber + ". " + description + " current bid $" + currentBid + " minimum bid $" + nextBid());
+            lot = "Lot " + lotNumber + ". " + description + " current bid $" + currentBid + " minimum bid $" + nextBid();
         }
-        return super.toString();
+        return lot;
     }
-
-
 }

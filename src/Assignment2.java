@@ -22,6 +22,7 @@ public class Assignment2 {
             Lot currentLot = new Lot();
             return currentLot;
         }
+
     }
 
     //adding an item to the lot
@@ -58,16 +59,18 @@ public class Assignment2 {
 
     public static void mainMenu(ArrayList<Lot> lot) {
         Scanner sc = new Scanner(System.in);
-        Lot currentLot = null;
+        Lot currentLot = getNextLot(lot);
         int answer = 1;
         while (answer < 5) {
+            if (!currentLot.getIsBidding()){
+                System.out.println("We are not currently bidding\n");
+            }
+
             System.out.println("""
-                    We are not currently bidding 
-                    
                     1. Add Lot to Auction
                     2. Start bidding on next Lot
                     3. Bid on current Lot
-                    4. Mark current Lot sold
+                    4. Mark current Lot Sold
                     5. Quit""");
 
             answer = sc.nextInt();
@@ -82,11 +85,14 @@ public class Assignment2 {
                         } else if ((currentLot != null) && (!currentLot.getSold())) {
                             System.out.println("You must mark the current lot as sold before bringing up the next Lot");
                         } else {
+                            currentLot.setBidding(true);
+                            System.out.println("Current Lot: \n" + currentLot);
                             currentLot = getNextLot(lot);
+
                         }
                         break;
                     case 3:
-                        if (currentLot == null) {
+                        if (!currentLot.getIsBidding()) {
                             System.out.println("You must bring a Lot up for bidding");
                         } else {
                             System.out.println("Lot " + currentLot.getLotNumber() + ". " + currentLot.getDescription() + " current bid: $" + currentLot.getCurrentBid() + " minimum bid: $" + currentLot.nextBid());
@@ -100,6 +106,7 @@ public class Assignment2 {
                         markSold(currentLot);
                         break;
                 }
-            }
+
+        }
     }
 }
